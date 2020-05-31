@@ -2,7 +2,7 @@ using System;
 
 namespace BattleShips
 {
-    class Player
+    class Player : IEquatable<Player>
     {
         public Player()
         {
