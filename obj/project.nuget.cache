@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "aft+iGdzATBv4cgyQCS/WpfElekrjSIjBdkyXeUuOGJxGSXwS+PiAdQ2j/2jMsFS/IvKpwpsM5encM9CLwQb0Q==",
+  "dgSpecHash": "Us72YS4WTx3bDe+jKSifQTUBaTCD910pcse+S/SpZdzQD10inseGSphu3Z160SKad+YiiJPa1HdSdCQGhyQBcw==",
   "success": true,
-  "projectFilePath": "/home/drazi/CODECOOL_C#/BattleShips/battle-ship-in-the-oo-way-war_ships/battle-ship-in-the-oo-way-war_ships.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/battle-ship-in-the-oo-way-war_ships.csproj",
+  "expectedPackageFiles": [
+    "/home/ndrd/.nuget/packages/microsoft.aspnetcore.app.ref/3.1.2/microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
   "logs": []
 }

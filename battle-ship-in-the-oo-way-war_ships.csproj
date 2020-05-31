@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>battle_ship_in_the_oo_way_war_ships</RootNamespace>
+    <RootNamespace>BattleShips</RootNamespace>
   </PropertyGroup>
 
 </Project>
