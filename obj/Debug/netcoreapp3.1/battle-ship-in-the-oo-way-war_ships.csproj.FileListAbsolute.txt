@@ -1,0 +1,13 @@
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/bin/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/bin/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.deps.json
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/bin/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.runtimeconfig.json
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/bin/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.runtimeconfig.dev.json
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/bin/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.dll
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/bin/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.pdb
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/obj/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.csprojAssemblyReference.cache
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/obj/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.AssemblyInfoInputs.cache
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/obj/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.AssemblyInfo.cs
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/obj/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.csproj.CoreCompileInputs.cache
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/obj/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.dll
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/obj/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.pdb
+/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/obj/Debug/netcoreapp3.1/battle-ship-in-the-oo-way-war_ships.genruntimeconfig.cache

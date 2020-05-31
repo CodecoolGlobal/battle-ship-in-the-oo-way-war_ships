@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "/home/drazi/.nuget/packages/": {}
+    "/home/ndrd/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/drazi/CODECOOL_C#/BattleShips/battle-ship-in-the-oo-way-war_ships/battle-ship-in-the-oo-way-war_ships.csproj",
+      "projectUniqueName": "/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/battle-ship-in-the-oo-way-war_ships.csproj",
       "projectName": "battle-ship-in-the-oo-way-war_ships",
-      "projectPath": "/home/drazi/CODECOOL_C#/BattleShips/battle-ship-in-the-oo-way-war_ships/battle-ship-in-the-oo-way-war_ships.csproj",
-      "packagesPath": "/home/drazi/.nuget/packages/",
-      "outputPath": "/home/drazi/CODECOOL_C#/BattleShips/battle-ship-in-the-oo-way-war_ships/obj/",
+      "projectPath": "/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/battle-ship-in-the-oo-way-war_ships.csproj",
+      "packagesPath": "/home/ndrd/.nuget/packages/",
+      "outputPath": "/home/ndrd/Documents/CodecoolKURS/VSC_Workspaces/OOP_Sprint1/battle-ship-in-the-oo-way-war_ships/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/drazi/.nuget/NuGet/NuGet.Config"
+        "/home/ndrd/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -51,12 +51,18 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.202/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.300/RuntimeIdentifierGraph.json"
       }
     }
   }
