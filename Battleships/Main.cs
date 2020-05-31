@@ -2,7 +2,7 @@
 
 namespace BattleShips
 {
-    class Program
+    class Main
     {
         static void Main(string[] args)
         {

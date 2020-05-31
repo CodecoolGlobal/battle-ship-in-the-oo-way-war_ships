@@ -9,11 +9,14 @@ namespace BattleShips
         private bool isHorizontal;
         private int[] StartingPoint = new int[2];
 
-        public Ship(int size, bool isvertical, int[] startingPoint) {
+        public Ship(int size, bool ishorizontal, int[] startingPoint) {
             
-            List<Square> squares = new List<Square>(size-1);
+            List<Square> squares = new List<Square>();
+            for (int i = 0; i < size; i++) {
+                squares[i] = new Square("S", false);
+            }
             this.Squares = squares;
-            this.isHorizontal = isvertical;
+            this.isHorizontal = ishorizontal;
             this.StartingPoint = startingPoint;
         }
         public bool IsShipHorizontal() {
