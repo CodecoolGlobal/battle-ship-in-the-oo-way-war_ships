@@ -2,11 +2,11 @@ using System;
 
 namespace BattleShips
 {
-    class Player
+    class Game
     {
-        public Player()
-        {
-
+        
+        public Game() {
+            
         }
     }
 }

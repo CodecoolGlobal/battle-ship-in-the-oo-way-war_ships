@@ -20,7 +20,7 @@ namespace BattleShips
             Ships.Add(shipToAdd);
         }
         
-        public List<List<Square>> InsertShipsList(){
+        public void InsertShipsList() {
             foreach (var ship_ in Ships) {
                 int ship_x = ship_.GetStartingPoint()[0];
                 int ship_y = ship_.GetStartingPoint()[1];
@@ -35,20 +35,20 @@ namespace BattleShips
                     }
                 }
             }
-            return Squares;
         }
         protected List<List<Square>> GenerateSquares(List<Ship> ships) {
             for (int i = 0; i < HEIGHT; i++){
                 List<Square> squareList = new List<Square>();
                 Squares.Add(squareList);
                 for (int j = 0; j < WIDTH; j++) {
-                    Square newSquare = new Square();
+                    Square newSquare = new Square(" ", false);
                     Squares[i].Add(newSquare);
                 }
             }
-            Squares = InsertShipsList();
             return Squares;
-    
+        }
+        public List<List<Square>> GetOceanSquares() {
+            return Squares;
         }
     }
 }
