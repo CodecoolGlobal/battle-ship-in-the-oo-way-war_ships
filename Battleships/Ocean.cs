@@ -21,17 +21,19 @@ namespace BattleShips
         }
         
         public void InsertShipsList() {
-            foreach (var ship_ in Ships) {
-                int ship_x = ship_.GetStartingPoint()[0];
-                int ship_y = ship_.GetStartingPoint()[1];
-                if (ship_.IsShipHorizontal()) {
-                    for (int i = 0; i < ship_.Squares.Count; i++) {
-                        Squares[ship_x + i][ship_y] = ship_.Squares[i];
+            Ship _ship;
+            for (int j = 0; j < Ships.Count; j++) {
+                _ship = Ships[j];
+                int ship_x = _ship.GetStartingPoint()[0];
+                int ship_y = _ship.GetStartingPoint()[1];
+                if (_ship.IsShipHorizontal()) {
+                    for (int i = 0; i < _ship.Squares.Count; i++) {
+                        Squares[ship_y][ship_x + i] = _ship.Squares[i];
                     }
                 }
                 else {
-                    for (int i = 0; i < ship_.Squares.Count; i++) {
-                        Squares[ship_x][ship_y + i] = ship_.Squares[i];
+                    for (int i = 0; i < _ship.Squares.Count; i++) {
+                        Squares[ship_y + 1][ship_x] = _ship.Squares[i];
                     }
                 }
             }

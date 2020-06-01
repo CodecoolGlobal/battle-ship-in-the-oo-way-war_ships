@@ -3,23 +3,26 @@ namespace BattleShips
     public class Square
     {
         private static char SYMBOL = 'X';
-        private string square;
+        private string aSquare;
 
-        public bool isHit;
+        public bool isHit {get; set;}
 
 
         public Square(string square, bool isHit)
 
         {
-            this.square = square;
+            this.aSquare = square;
             this.isHit = false;
         }
+        public string GetSquare() {
+            return aSquare;
+        }
 
-        public string toString(bool isHit, string square)
+        public string toString(bool isHit)
         {
             if (isHit == false)
             {
-                return string.Format($"[{0}]", ' ');
+                return string.Format($"[{0}]", aSquare);
             }
 
             else

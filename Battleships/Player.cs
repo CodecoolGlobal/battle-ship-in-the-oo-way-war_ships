@@ -2,11 +2,7 @@ using System;
 
 namespace BattleShips
 {
-<<<<<<< HEAD
-    public class Player
-=======
     class Player : IEquatable<Player>
->>>>>>> e2e07b1f272cdb4771f197e8dee6a94e06e3e28d
     {
 
         private Ocean PlayerOcean;
