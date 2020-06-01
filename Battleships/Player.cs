@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 
 namespace BattleShips
 {
@@ -18,6 +20,7 @@ namespace BattleShips
 
         public int enemyAttack(int[] coords)
         {
+            
         }
         
         public bool checkIfLoser()

@@ -8,7 +8,7 @@ namespace BattleShips
         private static int HEIGHT = 10;
         private static int WIDTH = 10;
         private List<List<Square>> Squares;
-        public List<Ship> Ships;
+        private List<Ship> Ships;
 
         public Ocean(List<Ship> ships)
         {
@@ -53,9 +53,9 @@ namespace BattleShips
             return Squares;
         }
 
-        // public List<Ship> GetShips()
-        // {
-        //     return Ships;
-        // }
+        public List<Ship> GetShips()
+        {
+            return this.Ships;
+        }
     }
 }
