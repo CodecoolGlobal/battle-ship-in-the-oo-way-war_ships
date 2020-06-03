@@ -28,8 +28,21 @@ namespace BattleShips
             playersList.Find();
         }
 
-        public string[] PlayerShot(string playerName, int[] coords) {
-
+        public string[] PlayerShot(string playerName, int[] coords) 
+        {
+            this.currentPLayer = playerName;
+            return coords;
         }
+
+        public Player ChangePlayer()
+        {
+            if( playersList.IndexOf(currentPLayer) == 0 )
+            {
+                this.currentPLayer = playersList[1];
+            }
+            
+            this.currentPLayer = playersList [0];
+        }   
+
     }
 }
