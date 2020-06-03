@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace BattleShips
 {
@@ -8,10 +9,10 @@ namespace BattleShips
 
         public List<Square> Squares {get; set;}
         private bool isHorizontal;
-        private int[] StartingPoint = new int[2];
+        private Point StartingPoint = new Point();
 
         // Important note: coords are [x,y], which means that: Squares[y][x]
-        public Ship(int size, bool ishorizontal, int[] startingPoint) 
+        public Ship(int size, bool ishorizontal, Point startingPoint) 
         {
             
             List<Square> squares = new List<Square>();
@@ -30,7 +31,7 @@ namespace BattleShips
             return isHorizontal;
         }
         // Getting ships starting point
-        public int[] GetStartingPoint() 
+        public Point GetStartingPoint() 
         {
             return StartingPoint;
         }

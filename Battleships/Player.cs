@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 
 namespace BattleShips
@@ -19,9 +20,14 @@ namespace BattleShips
             this.playerOcean = new Ocean(ships); 
         }
 
-        public int enemyAttack(int[] coords)
+        public string GetName()
         {
-            
+            return Name;
+        }
+
+        public int enemyAttack(Point coords)
+        {
+            playerOcean.GetOceanShips();
         }
         
         public bool checkIfLoser()

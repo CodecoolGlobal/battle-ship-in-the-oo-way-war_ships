@@ -23,12 +23,14 @@ namespace BattleShips
 
         }
 
-        public Player PlayerTurn()
+        public Player ChangePlayerTurn()
         {
-            playersList.Find();
+            int index = playersList.IndexOf(currentPLayer);
+            return playersList[index < playersList.Count ? index + 1 : index - 1];
         }
 
-        public string[] PlayerShot(string playerName, int[] coords) {
+        public string[] PlayerShot(string playerName, int[] coords) 
+        {
 
         }
     }
