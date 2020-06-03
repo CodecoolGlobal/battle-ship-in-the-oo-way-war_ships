@@ -44,5 +44,13 @@ namespace BattleShips
             this.currentPLayer = playersList [0];
         }   
 
+        public Player GameWinner(List playersList)
+        {
+            foreach (var player in playersList)
+            {
+                for( int i = ; i   )
+            }
+        }
+
     }
 }
