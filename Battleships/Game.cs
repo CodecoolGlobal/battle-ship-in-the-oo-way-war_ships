@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 
 namespace BattleShips
 {
@@ -11,7 +13,8 @@ namespace BattleShips
         private Player currentPLayer;
 
 
-        public Game(string gameType, List<Player> playersListInput) {
+        public Game(string gameType, List<Player> playersListInput) 
+        {
             
             this.startTime = DateTime.Now;
             this.playersList = playersListInput;
@@ -20,8 +23,9 @@ namespace BattleShips
 
         }
 
-        public Player PlayerTurn(){
-            playersList.Find()
+        public Player PlayerTurn()
+        {
+            playersList.Find();
         }
 
         public string[] PlayerShot(string playerName, int[] coords) {
