@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace BattleShips
@@ -17,7 +18,7 @@ namespace BattleShips
             this.Squares = GenerateSquares(ships);
             this.Ships = ships;
         }
-        public void AddShip(int size, bool isvert, int[] startingpoint) 
+        public void AddShip(int size, bool isvert, Point startingpoint) 
         {
             Ship shipToAdd = new Ship(size, isvert, startingpoint);
             Ships.Add(shipToAdd);
@@ -29,8 +30,8 @@ namespace BattleShips
             for (int j = 0; j < Ships.Count; j++) 
             {
                 _ship = Ships[j];
-                int ship_x = _ship.GetStartingPoint()[0];
-                int ship_y = _ship.GetStartingPoint()[1];
+                var ship_x = _ship.GetStartingPoint().X;
+                var ship_y = _ship.GetStartingPoint().Y;
                 if (_ship.IsShipHorizontal()) 
                 {
                     for (int i = 0; i < _ship.Squares.Count; i++) 
@@ -79,8 +80,8 @@ namespace BattleShips
 
             foreach (Ship ship in Ships) 
             {
-                int shipX = ship.GetStartingPoint()[0];
-                int shipY = ship.GetStartingPoint()[1];
+                int shipX = ship.GetStartingPoint().X;
+                int shipY = ship.GetStartingPoint().Y;
                 var shipXRange = Enumerable.Range(shipX, ship.IsShipHorizontal()? ship.Squares.Count : 1);
                 var shipYRange = Enumerable.Range(shipY, ship.IsShipHorizontal()? 1 : ship.Squares.Count);
                 if (shipXRange.Contains(shipX))

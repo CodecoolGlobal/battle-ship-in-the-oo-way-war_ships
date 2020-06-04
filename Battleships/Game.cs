@@ -31,7 +31,27 @@ namespace BattleShips
 
         public string[] PlayerShot(string playerName, int[] coords) 
         {
-
+            this.currentPLayer = playerName;
+            return coords;
         }
+
+        public Player ChangePlayer()
+        {
+            if( playersList.IndexOf(currentPLayer) == 0 )
+            {
+                this.currentPLayer = playersList[1];
+            }
+            
+            this.currentPLayer = playersList [0];
+        }   
+
+        public Player GameWinner(List playersList)
+        {
+            foreach (var player in playersList)
+            {
+                for( int i = ; i   )
+            }
+        }
+
     }
 }

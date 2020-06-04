@@ -20,14 +20,12 @@ namespace BattleShips
             this.playerOcean = new Ocean(ships); 
         }
 
-        public string GetName()
+        public int enemyAttack(char[] coords)
         {
-            return Name;
-        }
-
-        public int enemyAttack(Point coords)
-        {
-            playerOcean.GetOceanShips();
+            foreach (var ship in playerOcean.GetOceanShips())
+            {
+                for
+            }
         }
         
         public bool checkIfLoser()
