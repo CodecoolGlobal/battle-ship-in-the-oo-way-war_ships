@@ -49,7 +49,7 @@ namespace BattleShips
         {
             foreach (var player in playersList)
             {
-                for( int i = ; i   )
+                
             }
         }
 
