@@ -7,7 +7,7 @@ namespace BattleShips
 {
     class View
     {
-        private Dictionary<string,ConsoleColor> consoleColorScheme = new Dictionary<string, ConsoleColor>();
+        private Dictionary<string, ConsoleColor> consoleColorScheme = new Dictionary<string, ConsoleColor>();
         private Dictionary<string, Color> drawingColorScheme = new Dictionary<string, Color>();
         private string[] mainMenuOptions;
         private string[] settingsMenuOptions;
@@ -15,7 +15,7 @@ namespace BattleShips
         public View() 
         {
             consoleColorScheme.Add("back", ConsoleColor.Blue);
-            drawingColorScheme.Add();
+            consoleColorScheme.Add("front", ConsoleColor.White);
 
             mainMenuOptions = new string[] 
             {
@@ -36,6 +36,10 @@ namespace BattleShips
         {
             Console.BackgroundColor = consoleColorScheme["back"];
         }
+        public void ForegroundColorChanger()
+        {
+            Console.ForegroundColor = consoleColorScheme["front"];
+        }
         public void ConsoleColorReset()
         {
             Console.ResetColor();
@@ -43,16 +47,28 @@ namespace BattleShips
         public void DisplayFrameTop(string title, int width)
         {
             Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", 20)) + "\u2513");
-            Console.WriteLine('\u2503'.ToString() + $"{title:width}" + "\u2513");
+            Console.WriteLine('\u2503'.ToString() + new string(' ', (width - title.Length) / 2) + 
+                                $"{title.ToUpper()}" + new string(' ', (width - title.Length) / 2) + "\u2513");
         }
         
-        public string MainMenu()
+        public void DisplayFrameBottom(int width)
         {
-            
+            Console.WriteLine('\u2503'.ToString() + $"{String.Empty:width}" + "\u2513");
+            Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", 20)) + "\u2513");
+        }
+        public string Menu(string title, Dictionary<string,string> options)
+        {
+            DisplayFrameTop(title, Console.WindowWidth);
+
         }
         public void SetConsoleDimensions(int width, int height)
         {
-            
+            Console.WindowHeight = width;
+            Console.WindowWidth = height;
+        }
+        public void DisplayGameStatistics(Game currentGame)
+        {
+            Game.
         }
     }
 }

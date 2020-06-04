@@ -111,5 +111,9 @@ namespace BattleShips
         {
             return Ships;
         }
+        public CheckIfShipsOverlap()
+        {
+            
+        }
     }
 }
