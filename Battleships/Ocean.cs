@@ -10,7 +10,8 @@ namespace BattleShips
         private static int HEIGHT = 10;
         private static int WIDTH = 10;
         private List<List<Square>> Squares;
-        private List<Ship> Ships;
+        public List<Ship> Ships {get; set;}
+
         private Random randBase = new Random();
 
         public Ocean(List<Ship> ships)
