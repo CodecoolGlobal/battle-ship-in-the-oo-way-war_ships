@@ -68,7 +68,15 @@ namespace BattleShips
         }
         public void DisplayGameStatistics(Game currentGame)
         {
-            Game.
+            
+        }
+        public string GetStringData(string query, string dataName)
+        {
+            DisplayFrameTop($"{query}", Console.WindowWidth);
+            Console.WriteLine($"Please provide {dataName}");
+            var result = Console.ReadLine();
+            return result;
+            
         }
     }
 }

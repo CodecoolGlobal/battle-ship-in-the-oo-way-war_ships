@@ -22,8 +22,11 @@ namespace BattleShips
 
 
         }
-
         public Player ChangePlayerTurn()
+        {
+            return OtherPlayer();
+        }
+        public Player OtherPlayer()
         {
             int index = playersList.IndexOf(currentPLayer);
             return playersList[index < playersList.Count ? index + 1 : index - 1];

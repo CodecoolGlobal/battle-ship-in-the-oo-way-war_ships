@@ -98,22 +98,87 @@ namespace BattleShips
         - if ship can not be placed with chosen arrangement it flips and tries again with differnt one
         - raises error when it is not possible
         */
-        public Ship RandomlyGenerateShip(int size)
+        public Ship RandomlyGenerateShip(int size, List<Ship> ships)
         {
             var randIsHorizontal = randBase.Next(0,100) < 50 ? true : false;
+            Ship newShip;
+            Point startingPoint;
             while (true)
             {
-                break;
+                startingPoint = new Point(randBase.Next(0, WIDTH) - size, randBase.Next(0, HEIGHT));
+                newShip = new Ship(size, randIsHorizontal, startingPoint);
+                if (CheckIfNewShipCorrect(newShip, ships))
+                {
+                    break;
+                }
             }
-            return Ships[0];
+            return newShip;
         }
-        public List<Ship> RandomlyGenerateShips()
+
+        public List<Ship> RandomlyGenerateShips(int maximumSize)
+        // Method to generate random ships inside Borad size with one of each 
         {
-            return Ships;
+            List<Ship> generatedShips = new List<Ship>();
+            for (int size = maximumSize; size < 0; size--)
+            {
+                generatedShips.Add(RandomlyGenerateShip(size, generatedShips));
+            }
+            return generatedShips;
         }
-        public CheckIfShipsOverlap()
+        public bool CheckIfNewShipCorrect(Ship checkShip, List<Ship> existingShips)
         {
-            
+            if (!CheckIfShipInBoard(checkShip))
+            {
+                return false;
+            }
+            List<Point> coordsOffLimits = new List<Point>();
+            Point coordCheckShip = new Point(-1, -1);
+            foreach (var _ship in existingShips)
+            {
+                Point offLimitsRangeStart = new Point(_ship.GetStartingPoint().X - 1, _ship.GetStartingPoint().Y - 1);
+                Point offLimitsRangeEnd = new Point(_ship.IsShipHorizontal() ? _ship.GetStartingPoint().X + _ship.Squares.Count + 1 : _ship.GetStartingPoint().X + 1
+                                                    ,_ship.IsShipHorizontal() ? _ship.GetStartingPoint().Y + 1 : _ship.GetStartingPoint().Y + _ship.Squares.Count + 1);
+                for (int ctrx = offLimitsRangeStart.X; ctrx < offLimitsRangeEnd.X + 1; ctrx++)
+                {
+                    for (int ctry = offLimitsRangeStart.Y; ctry < offLimitsRangeEnd.Y + 1; ctry++)
+                    {
+                        coordsOffLimits.Add(new Point(ctrx, ctry));
+                    }
+                }                
+            }
+            for (int i = 0; i < checkShip.Squares.Count; i++)
+                coordCheckShip = new Point(checkShip.IsShipHorizontal() ? checkShip.GetStartingPoint().X + i : checkShip.GetStartingPoint().X,
+                                           checkShip.IsShipHorizontal() ? checkShip.GetStartingPoint().Y : checkShip.GetStartingPoint().Y + i);
+                if (coordsOffLimits.Contains(coordCheckShip))
+                {
+                    return false;
+                }
+            return true;
+        }
+        public bool CheckIfShipInBoard(Ship checkShip)
+        {
+            if (checkShip.IsShipHorizontal())
+            {
+                if (checkShip.GetStartingPoint().X + checkShip.Squares.Count > WIDTH)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (checkShip.GetStartingPoint().X + checkShip.Squares.Count > WIDTH)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
     }
 }
