@@ -61,5 +61,16 @@ namespace BattleShips
             }            
         }
 
+        public bool GameEnd(List playersList)
+        {
+            foreach(var player in playersList)
+            {
+                if (player.GameWinner)
+                {
+                    return false;
+                }
+            }
+        }
+
     }
 }
