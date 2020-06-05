@@ -50,10 +50,15 @@ namespace BattleShips
 
         public Player GameWinner(List playersList)
         {
-            foreach (var player in playersList)
+            if(currentPLayer.checkIfLoser == true)
             {
-                
+                return OtherPlayer();
             }
+
+            else if( OtherPlayer.checkIfLoser == true)
+            {
+                return currentPLayer;
+            }            
         }
 
     }
