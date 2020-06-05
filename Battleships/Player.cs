@@ -13,35 +13,43 @@ namespace BattleShips
         private string Name;
         private bool IsComp;
         private bool IsLoser;
-        private Ship playerShip;
-        private List<List<Squares>> playerSquares;
+    
 
         public Player(string name)
-        {
-            List<Ship> ships = new List<Ship>();
+        {       
             this.Name = name;
             this.playerOcean = new Ocean(ships); 
-            this.playerShip = new Ship(startingPoint);
-            this.playerSquares = new Ocean(squares);
             
         }
 
         public int enemyAttack(Point coords)
         {
-            foreach (var ship in playerOcean.GetShips())
+            foreach (var ship in playerOcean.GetOceanShips())
             {
-                if (ship
+                foreach( var square in ship.Squares)
+                {
+                    if (square[x][y] == coords)
+                    {
+                        if (square == square('S', false))
+                        {
+
+                        }
+                    }
+                        
+                }
             }
         }
         
         public bool checkIfLoser()
         {
-            foreach (var squares in playerOcean.GetOceanSquares())
+            foreach (var ship in playerOcean.GetOceanShips())
             {
-                foreach (var square in squares)
+                if (ship.ShipSank == false)
                 {
-                    if 
+                    return true;
                 }
+                return false;
+
             }
         }
 
