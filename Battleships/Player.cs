@@ -54,7 +54,7 @@ namespace BattleShips
                 }
             }
         }
-        // effectOnAttack - missAgain = 0 - miss, already shot at; missOk = 1 - miss, new shot; shotAgain = 2 - shot, already shot; shotOk = 3 - shot, new shot
+        // effectOnAttack - missAgain = 0 - miss, already shot at; missOk = 1 - miss, new shot; shotAgain = 2 - shot, already shot; shotOk = 3 - shot, new shot; 4 - shot ok, ship sanked
         //
         public int enemyAttack(Point coords)
         {   
@@ -70,6 +70,10 @@ namespace BattleShips
                     {
                        if (coords.X == checkShip.GetStartingPoint().X + ctr && coords.Y == checkShip.GetStartingPoint().Y)
                        {
+                           if (checkShip.ShipSank().Equals(true))
+                           {
+                               effectOnAttack = 4;
+                           }
                            effectOnAttack = EffectOnAttack(checkShip.Squares[ctr]);
                        }
                     }
@@ -77,12 +81,16 @@ namespace BattleShips
                     {
                         if (coords.X == checkShip.GetStartingPoint().X && coords.Y == checkShip.GetStartingPoint().Y + ctr)
                        {
+                            if (checkShip.ShipSank().Equals(true))
+                           {
+                               effectOnAttack = 4;
+                           }
                            effectOnAttack = EffectOnAttack(checkShip.Squares[ctr]);
                        }
                     }   
                 }
-                isShipSank = checkShip.ShipSank();
             }
+            return effectOnAttack;
             
         }
         
