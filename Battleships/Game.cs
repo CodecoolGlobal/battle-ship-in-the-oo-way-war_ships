@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 
 namespace BattleShips
@@ -34,10 +35,9 @@ namespace BattleShips
             return playersList[index < playersList.Count ? index + 1 : index - 1];
         }
 
-        public string[] PlayerShot(string playerName, int[] coords) 
+        public int PlayerShot(Player otherPlayer, Point coords)        
         {
-            currentPLayer = playerName;
-            return coords;
+            return otherPlayer.EnemyAttack(coords);
         }
 
         protected void ChangePlayer()
@@ -45,30 +45,26 @@ namespace BattleShips
             currentPLayer = OtherPlayer();
         }   
 
-        public Player GameWinner(List<Player> playersList)
+        public Player GameWinner(Player currentPLayer)
         {
-            if(currentPLayer.checkIfLoser() == true)
-            {
-                return OtherPlayer();
-            }
-
-            else if( OtherPlayer().checkIfLoser() == true)
+            if (currentPLayer.checkIfLoser() == true & OtherPlayer().checkIfLoser() == false)
             {
                 return currentPLayer;
             }
-            return null;
+            return OtherPlayer();
+
         }
 
-        public bool GameEnd(List playersList)
+        public bool GameEnd(List <Player> playersList)
         {
             foreach(var player in playersList)
             {
-                if (player.GameWinner)
+                if (player.checkIfLoser() == false)
                 {
-                    return false;
+                    return true;
                 }
-            }
-
+            }   
+            return false;
         }
 
     }
