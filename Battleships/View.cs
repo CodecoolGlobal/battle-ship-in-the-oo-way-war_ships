@@ -30,20 +30,20 @@ namespace BattleShips
             
 
         }
-        
-        public void BackgroundColorChanger()
+
+        private void BackgroundColorChanger()
         {
             Console.BackgroundColor = consoleColorScheme["back"];
         }
-        public void ForegroundColorChanger()
+        private void ForegroundColorChanger()
         {
             Console.ForegroundColor = consoleColorScheme["front"];
         }
-        public void ConsoleColorReset()
+        private void ConsoleColorReset()
         {
             Console.ResetColor();
         }
-        protected void DisplayFrameTop(string title, int width)
+        private void DisplayFrameTop(string title, int width)
         {
             Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", 20)) + "\u2513");
             int titleLenEven = title.Length % 2 == 0 ? title.Length : title.Length + 1;
@@ -51,7 +51,7 @@ namespace BattleShips
                                 $"{title.ToUpper()}" + new string(' ', (width - titleLenEven) / 2) + "\u2513");
         }
         
-        protected void DisplayFrameBottom(int width, bool needEnter)
+        private void DisplayFrameBottom(int width, bool needEnter)
         {
             if (needEnter)
             {   
@@ -66,6 +66,52 @@ namespace BattleShips
             {
                 Console.WriteLine('\u2503'.ToString() + $"{String.Empty:width}" + "\u2513");
                 Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u2513");
+            }
+        }
+        private void DisplayTable(Dictionary<string, string> optionsDictionary)
+        {   var optionsKeys = optionsDictionary.Keys.ToArray();
+            Console.WriteLine(String.Format("  {0, -30} {1, 25}", "Option", "Value"));
+            for (int ctropt = 0; ctropt < optionsKeys.Length; ctropt++)
+            {
+                Console.WriteLine(String.Format("  {0, -30} {1, 25}", optionsKeys[ctropt], optionsDictionary[optionsKeys[ctropt]]));
+            }
+        }
+        
+        private void DisplayMessage(string errorMessage)
+        {
+            Console.Clear();
+            DisplayFrameTop("Invalid value", Console.WindowWidth);
+            DisplayHalfScreenEmpty();
+            Console.WriteLine(errorMessage + "\n\nPress any key...");
+            Console.ReadKey();
+        }
+        private void DisplayHalfScreenEmpty()
+        {
+            for (int ctr = 0; ctr < (Console.WindowHeight - 2) / 2; ctr++)
+            {
+                Console.WriteLine(String.Empty);
+            }
+        }
+        private void DisplayRemainingScreenEmpty(int contentHeight, int bordersLines)
+        {   
+            var remainingHeight = Console.WindowHeight - contentHeight - bordersLines;
+            for (int ctr = 0; ctr < remainingHeight / 2; ctr++)
+            {
+                Console.WriteLine(String.Empty);
+            }
+        }
+        // public methods
+        public List<Ship> PutShipsOnBoard(string info, )
+        {
+            var keyList = options.Keys.ToList();
+            int selectedKeyNum = 0;
+            string pointer = " >>>";
+            string ifPointer;
+            string optionDisplayed;
+            while (true)
+            {
+                DisplayFrameTop("Put ships on Your ocean", Console.WindowWidth);
+                Console.WriteLine();
             }
         }
         public string Menu(string title, string info, Dictionary<string,string> options)
@@ -156,38 +202,5 @@ namespace BattleShips
                 }
             }
         }
-        
-        private void DisplayMessage(string errorMessage)
-        {
-            Console.Clear();
-            DisplayFrameTop("Invalid value", Console.WindowWidth);
-            DisplayHalfScreenEmpty();
-            Console.WriteLine(errorMessage + "\n\nPress any key...");
-            Console.ReadKey();
-        }
-
-        private void DisplayHalfScreenEmpty()
-        {
-            for (int ctr = 0; ctr < (Console.WindowHeight - 2) / 2; ctr++)
-            {
-                Console.WriteLine(String.Empty);
-            }
-        }
-        private void DisplayRemainingScreenEmpty(int contentHeight, int bordersLines)
-        {
-
-        }
-        public List<Ship> PutShipsOnBoard(string info, )
-        {
-            var keyList = options.Keys.ToList();
-            int selectedKeyNum = 0;
-            string pointer = " >>>";
-            string ifPointer;
-            string optionDisplayed;
-            while (true)
-            {
-                DisplayFrameTop("Put ships on Your ocean", Console.WindowWidth);
-                Console.WriteLine()
-            }
-        }
+    }
 }

@@ -37,9 +37,9 @@ namespace BattleShips
         private static string mainMenuInfo = "Select an action. Move using arrows, confirm your selection by pressing Enter";
         private Dictionary<string,string> settingsMenuOptions = new Dictionary<string, string>
         {
-            {"ocean_width", $"Set width of the player's ocean [8 - 20]. Current {Ocean.WIDTH}"},
-            {"ocean_height", $"Set width of the player's ocean [8 - 20]. Current {Ocean.HEIGHT}"},
-            {"ships", "Set numbers of particular ship sizes"},
+            {"ocean_width", $"Set width of the player's ocean [8 - 20]. Current {WIDTH}"},
+            {"ocean_height", $"Set width of the player's ocean [8 - 20]. Current {HEIGHT}"},
+            {"ships", "Add new ship type"},
             {"back", "Go back to main menu"}
         };
         private string settingsMenuInfo = "Select a setting to edit...";
@@ -72,7 +72,7 @@ namespace BattleShips
         {
             while (true)
             {
-                controllerDisplay.DisplayOptions;
+                
                 string optionChoice = controllerDisplay.Menu("Options", settingsMenuInfo, settingsMenuOptions);
                 switch (optionChoice)
                 {
@@ -85,7 +85,13 @@ namespace BattleShips
                         HEIGHT = controllerDisplay.GetIntData("provide ocean's height","player's ocean's height", heightRange);
                         break;
                     case "ships":
-                        
+                    var sizeRange = new int[] {1,6};
+                        var newShipName = controllerDisplay.GetStringData(" provide new ship name", "new ship name");
+                        var newShipSize = controllerDisplay.GetIntData("provide ship type size", "new ship type size", sizeRange);
+                        shipsSizesAndNames.Add(newShipSize, newShipName);
+                        break;
+                    case "back":
+                        break;
                 }
             }
         }
