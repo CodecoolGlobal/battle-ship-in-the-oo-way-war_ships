@@ -6,7 +6,7 @@ namespace BattleShips
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var gameBody = new BattleshipsController();
         }
     }
 }

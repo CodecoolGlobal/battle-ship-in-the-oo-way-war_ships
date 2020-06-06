@@ -8,6 +8,7 @@ namespace BattleShips
     {
         private DateTime startTime;
         private DateTime endTime;
+        //Game type pvp or pvc
         private string gameTypeName;
         private List<Player> playersList;
         private Player currentPLayer;
