@@ -22,9 +22,25 @@ namespace BattleShips
             this.startTime = DateTime.Now;
             this.playersList = playersListInput;
             this.gameTypeName = gameType;
-
-            while (true)
+            this.currentPLayer = playersList[0];
+                
+            bool isRunning = true;
+            while (isRunning)
             {
+                System.Console.WriteLine("Enter the coordinates of attack\n");
+                Point coords = Console.ReadLine();
+                var playerShot = PlayerShot(currentPLayer, coords); 
+                var message = shotMessage(playerShot);
+                bool isEnd = GameEnd(playersList);
+                if (isEnd == true)
+                {
+                    Player winner = GameWinner(currentPLayer);
+                    isRunning = false;
+                }
+                Player nextPlayer = ChangePlayerTurn();
+                currentPLayer = nextPlayer;
+                continue;
+
 
             }
 
@@ -100,6 +116,42 @@ namespace BattleShips
                                         , shipsRemaining);
             }
             return playersTableData;
+        }
+
+        public string shotMessage(int shotEffect)
+        {
+
+
+            if (shotEffect == 0)
+            {
+            string message = "Unfortunatelly, you missed again in the same place";
+            return message;
+            }
+
+            else if (shotEffect == 1)
+            {
+            string message = "You missed, but in another place";
+            return message;
+            }
+
+            else if (shotEffect == 2)
+            {
+            string message = "You have already shot this ship";
+            return message;
+            }
+
+            else if (shotEffect == 3)
+            {
+            string message = "Good job! You hit an enemy ship";
+            return message;
+            }
+
+            else 
+            {
+            string message = "Well done captain! You sunk enemy ship!";
+            return message;
+            }
+            
         }
 
     }
