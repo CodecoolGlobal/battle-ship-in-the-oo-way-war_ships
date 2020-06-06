@@ -15,6 +15,13 @@ namespace BattleShips
             {3, "submarine"},
             {2, "destroyer"}
         };
+        public static int MISSAGAIN = 0;
+        public static int MISSOK  = 1;
+        public static int SHOTAGAIN = 2;
+        public static int SHOTOK = 3;
+        public static int SHOTSANKED = 4;
+        public static int HEIGHT = 10;
+        public static int WIDTH = 10;
         private static Dictionary<string,string> mainMenuOptions = new Dictionary<string, string>
         {
             {"new_game", "Start new game"},
@@ -53,21 +60,32 @@ namespace BattleShips
                         break;
 
                     case "options":
-                    while (true)
-                        controllerDisplay.DisplayOptions;
-                        string optionChoice = controllerDisplay.Menu("Options", settingsMenuInfo, settingsMenuOptions);
-                        switch (optionChoice)
-                        {
-                            case "ocean_width":
-                                controllerDisplay.
-
-
-                        }
+                        OptionsSwitch();
                         break;
-
                     case "quit":
                         Environment.Exit(0);
                         break;
+                }
+            }
+        }
+        private void OptionsSwitch()
+        {
+            while (true)
+            {
+                controllerDisplay.DisplayOptions;
+                string optionChoice = controllerDisplay.Menu("Options", settingsMenuInfo, settingsMenuOptions);
+                switch (optionChoice)
+                {
+                    case "ocean_width":
+                        int[] widthRange = new int[] {8, 20};
+                        WIDTH = controllerDisplay.GetIntData("provide ocean's width","player's ocean's width", widthRange);
+                        break;
+                    case "ocean_height":
+                        var heightRange = new int[] {8, 20};
+                        HEIGHT = controllerDisplay.GetIntData("provide ocean's height","player's ocean's height", heightRange);
+                        break;
+                    case "ships":
+                        
                 }
             }
         }

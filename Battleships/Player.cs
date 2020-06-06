@@ -16,11 +16,6 @@ namespace BattleShips
         // Read-only type
         public int shotsFired {get;}
         //Read-only shotsFired
-        public static int MISSAGAIN = 0;
-        public static int MISSOK  = 1;
-        public static int SHOTAGAIN = 2;
-        public static int SHOTOK = 3;
-        public static int SHOTSANKED = 4;
 
         public Player(bool isCPU, string name)
         {       
@@ -39,11 +34,11 @@ namespace BattleShips
             {
                 if (square.GetSquare() == "S")
                 {
-                    return SHOTAGAIN;
+                    return BattleshipsController.SHOTAGAIN;
                 }
                 else
                 {
-                    return MISSAGAIN;
+                    return BattleshipsController.MISSAGAIN;
                 }
             }
             else
@@ -51,12 +46,12 @@ namespace BattleShips
                 if (square.GetSquare() == "S")
                 {   
                     square.isHit = true;
-                    return SHOTOK;
+                    return BattleshipsController.SHOTOK;
                 }
                 else
                 {
                     square.isHit = true;
-                    return MISSOK;
+                    return BattleshipsController.MISSOK;
                 }
             }
         }
@@ -85,9 +80,9 @@ namespace BattleShips
                            effectOnAttack = EffectOnAttack(checkShip.Squares[ctr]);
                        }
                     }
-                    if (checkShip.ShipSank().Equals(true))
+                    if (checkShip.ShipSank() > 0)
                     {
-                        effectOnAttack = SHOTSANKED;
+                        effectOnAttack = BattleshipsController.SHOTSANKED;
                     }   
                 }
             }
@@ -95,13 +90,12 @@ namespace BattleShips
             return effectOnAttack;
             
         }
-        // SWITCH to choose from used things with effectOnAttack
         
         public bool checkIfLoser()
         {
             foreach (var ship in playerOcean.Ships)
             {
-                if (!ship.ShipSank())
+                if (ship.ShipSank() == 0)
                 {
                     return false;
                 }

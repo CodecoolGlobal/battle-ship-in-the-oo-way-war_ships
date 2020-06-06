@@ -6,9 +6,7 @@ using System.Linq;
 namespace BattleShips
 {
     public class Ocean
-    {
-        public static int HEIGHT = 10;
-        public static int WIDTH = 10;
+    {   
         private List<List<Square>> Squares;
         public List<Ship> Ships {get; set;}
 
@@ -80,11 +78,11 @@ namespace BattleShips
         }
         private List<List<Square>> GenerateSquares() 
         {
-            for (int i = 0; i < HEIGHT; i++)
+            for (int i = 0; i < BattleshipsController.HEIGHT; i++)
             {
                 List<Square> squareList = new List<Square>();
                 Squares.Add(squareList);
-                for (int j = 0; j < WIDTH; j++) 
+                for (int j = 0; j < BattleshipsController.WIDTH; j++) 
                 {
                     Square newSquare = new Square(" ", false);
                     Squares[i].Add(newSquare);
@@ -134,7 +132,7 @@ namespace BattleShips
             Point startingPoint;
             while (true)
             {
-                startingPoint = new Point(randBase.Next(0, WIDTH) - size, randBase.Next(0, HEIGHT));
+                startingPoint = new Point(randBase.Next(0, BattleshipsController.WIDTH) - size, randBase.Next(0, BattleshipsController.HEIGHT));
                 newShip = new Ship(size, randIsHorizontal, startingPoint);
                 if (CheckIfNewShipCorrect(newShip, ships))
                 {
@@ -188,7 +186,7 @@ namespace BattleShips
         {
             if (checkShip.IsShipHorizontal())
             {
-                if (checkShip.GetStartingPoint().X + checkShip.Squares.Count > WIDTH)
+                if (checkShip.GetStartingPoint().X + checkShip.Squares.Count > BattleshipsController.WIDTH)
                 {
                     return false;
                 }
@@ -199,7 +197,7 @@ namespace BattleShips
             }
             else
             {
-                if (checkShip.GetStartingPoint().Y + checkShip.Squares.Count > HEIGHT)
+                if (checkShip.GetStartingPoint().Y + checkShip.Squares.Count > BattleshipsController.HEIGHT)
                 {
                     return false;
                 }

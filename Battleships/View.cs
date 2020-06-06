@@ -121,8 +121,6 @@ namespace BattleShips
             }
             DisplayRemainingScreenEmpty(5, 2);
             DisplayFrameBottom(Console.WindowWidth, true);
-
-
         }
         public string GetStringData(string query, string dataName)
         {
