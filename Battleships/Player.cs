@@ -91,6 +91,7 @@ namespace BattleShips
             return effectOnAttack;
             
         }
+        // SWITCH to choose from used things with effectOnAttack
         
         public bool checkIfLoser()
         {
