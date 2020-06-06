@@ -11,7 +11,7 @@ namespace BattleShips
         private bool isHorizontal;
         private Point StartingPoint = new Point();
 
-        // Important note: coords are [x,y], which means that: Squares[y][x]
+        // Important note: coords are Point(x,y), which means that: Squares[y][x]
         public Ship(int size, bool ishorizontal, Point startingPoint) 
         {
             

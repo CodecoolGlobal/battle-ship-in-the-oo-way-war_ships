@@ -13,19 +13,24 @@ namespace BattleShips
         public List<Ship> Ships {get; set;}
 
         private Random randBase = new Random();
-
+        public Ocean()
+        {
+            this.Squares = GenerateSquares();
+            this.Ships = new List<Ship>();
+        }
         public Ocean(List<Ship> ships)
         {
-            this.Squares = GenerateSquares(ships);
+            this.Squares = GenerateSquares();
             this.Ships = ships;
+            InsertShips();
         }
-        public void AddShip(int size, bool isvert, Point startingpoint) 
+        public void AddShip(int size, bool ishorizontal, Point startingpoint) 
         {
-            Ship shipToAdd = new Ship(size, isvert, startingpoint);
+            Ship shipToAdd = new Ship(size, ishorizontal, startingpoint);
             Ships.Add(shipToAdd);
         }
         
-        public void InsertShipsList() 
+        protected void InsertShips()
         {
             Ship _ship;
             for (int j = 0; j < Ships.Count; j++) 
@@ -49,7 +54,31 @@ namespace BattleShips
                 }
             }
         }
-        protected List<List<Square>> GenerateSquares(List<Ship> ships) 
+        protected void InsertShipsList(List<Ship> shipsList)
+        {
+            Ship _ship;
+            for (int j = 0; j < shipsList.Count; j++) 
+            {
+                _ship = shipsList[j];
+                var ship_x = _ship.GetStartingPoint().X;
+                var ship_y = _ship.GetStartingPoint().Y;
+                if (_ship.IsShipHorizontal()) 
+                {
+                    for (int i = 0; i < _ship.Squares.Count; i++) 
+                    {
+                        Squares[ship_y][ship_x + i] = _ship.Squares[i];
+                    }
+                }
+                else 
+                {
+                    for (int i = 0; i < _ship.Squares.Count; i++) 
+                    {
+                        Squares[ship_y + 1][ship_x] = _ship.Squares[i];
+                    }
+                }
+            }
+        }
+        protected List<List<Square>> GenerateSquares() 
         {
             for (int i = 0; i < HEIGHT; i++)
             {
@@ -61,7 +90,6 @@ namespace BattleShips
                     Squares[i].Add(newSquare);
                 }
             }
-            InsertShipsList();
             return Squares;
         }
         public List<List<Square>> GetOceanSquares() 
@@ -74,10 +102,10 @@ namespace BattleShips
             return Ships;
         }
         // Checking coordinates of a shot if they belong to Ship coords format int[2] [Xcoord, Ycoord] ex. A5 = [0,5]
-        public bool IsCoordShip(int[] coord)
+        public bool IsCoordShip(Point coord)
         {
-            int coordX = coord[0];
-            int coordY = coord[1];
+            int coordX = coord.X;
+            int coordY = coord.Y;
 
             foreach (Ship ship in Ships) 
             {
@@ -85,7 +113,7 @@ namespace BattleShips
                 int shipY = ship.GetStartingPoint().Y;
                 var shipXRange = Enumerable.Range(shipX, ship.IsShipHorizontal()? ship.Squares.Count : 1);
                 var shipYRange = Enumerable.Range(shipY, ship.IsShipHorizontal()? 1 : ship.Squares.Count);
-                if (shipXRange.Contains(shipX))
+                if (shipXRange.Contains(shipX) && shipYRange.Contains(shipY))
                 {
                     return true;
                 }
@@ -128,7 +156,7 @@ namespace BattleShips
         }
         public bool CheckIfNewShipCorrect(Ship checkShip, List<Ship> existingShips)
         {
-            if (!CheckIfShipInBoard(checkShip))
+            if (!CheckIfShipInOcean(checkShip))
             {
                 return false;
             }
@@ -156,7 +184,7 @@ namespace BattleShips
                 }
             return true;
         }
-        public bool CheckIfShipInBoard(Ship checkShip)
+        protected bool CheckIfShipInOcean(Ship checkShip)
         {
             if (checkShip.IsShipHorizontal())
             {
@@ -171,7 +199,7 @@ namespace BattleShips
             }
             else
             {
-                if (checkShip.GetStartingPoint().X + checkShip.Squares.Count > WIDTH)
+                if (checkShip.GetStartingPoint().Y + checkShip.Squares.Count > HEIGHT)
                 {
                     return false;
                 }

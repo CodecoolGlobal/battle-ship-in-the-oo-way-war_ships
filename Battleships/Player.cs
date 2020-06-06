@@ -11,33 +11,35 @@ namespace BattleShips
 
         public Ocean playerOcean;
         private string Name;
-        private bool IsComp;
-        private bool IsLoser;
-    
-
-        public Player(string name)
+        private bool isComp;
+        private bool isLoser;
+        public static int MISSAGAIN = 0;
+        public static int MISSOK  = 1;
+        public static int SHOTAGAIN = 2;
+        public static int SHOTOK = 3;
+        public static int SHOTSANKED = 4;
+        public Player(string name, List<Ship> ships)
         {       
             this.Name = name;
             this.playerOcean = new Ocean(ships); 
-            
         }
-        // missAgain = 0 - miss, already shot at; missOk = 1 - miss, new shot; shotAgain = 2 - shot, already shot; shotOk = 3 - shot, new shot
+        public Player(string name)
+        {       
+            this.Name = name;
+            this.playerOcean = new Ocean(); 
+        }
+        // MISSAGAIN = 0 - miss, already shot at; MISSOK = 1 - miss, new shot; SHOTAGAIN = 2 - shot, already shot; SHOTOK = 3 - shot, new shot
         private int EffectOnAttack(Square square)
         {
-            int missAgain = 0;
-            int missOk  = 1;
-            int shotAgain = 2;
-            int shotOk = 3;
-
             if (square.isHit)
             {
                 if (square.GetSquare() == "S")
                 {
-                    return shotAgain;
+                    return SHOTAGAIN;
                 }
                 else
                 {
-                    return missAgain;
+                    return MISSAGAIN;
                 }
             }
             else
@@ -45,21 +47,20 @@ namespace BattleShips
                 if (square.GetSquare() == "S")
                 {   
                     square.isHit = true;
-                    return shotOk;
+                    return SHOTOK;
                 }
                 else
                 {
                     square.isHit = true;
-                    return missOk;
+                    return MISSOK;
                 }
             }
         }
-        // effectOnAttack - missAgain = 0 - miss, already shot at; missOk = 1 - miss, new shot; shotAgain = 2 - shot, already shot; shotOk = 3 - shot, new shot; 4 - shot ok, ship sanked
-        //
-        public int enemyAttack(Point coords)
+        // effectOnAttack - MISSAGAIN = 0 - miss, already shot at; MISSOK = 1 - miss, new shot; SHOTAGAIN = 2 - shot, already shot; SHOTOK = 3 - shot, new shot; 4 - SHOTSANKED, ship sanked
+        // int type: 
+        public int EnemyAttack(Point coords)
         {   
-            int effectOnAttack;
-            bool isShipSank = false;
+            int effectOnAttack = 0;
             List<Ship> playerShips = playerOcean.Ships;
             for (int shipctr = 0; shipctr < playerShips.Count; shipctr++)
             {
@@ -70,10 +71,6 @@ namespace BattleShips
                     {
                        if (coords.X == checkShip.GetStartingPoint().X + ctr && coords.Y == checkShip.GetStartingPoint().Y)
                        {
-                           if (checkShip.ShipSank().Equals(true))
-                           {
-                               effectOnAttack = 4;
-                           }
                            effectOnAttack = EffectOnAttack(checkShip.Squares[ctr]);
                        }
                     }
@@ -81,32 +78,30 @@ namespace BattleShips
                     {
                         if (coords.X == checkShip.GetStartingPoint().X && coords.Y == checkShip.GetStartingPoint().Y + ctr)
                        {
-                            if (checkShip.ShipSank().Equals(true))
-                           {
-                               effectOnAttack = 4;
-                           }
                            effectOnAttack = EffectOnAttack(checkShip.Squares[ctr]);
                        }
+                    }
+                    if (checkShip.ShipSank().Equals(true))
+                    {
+                        effectOnAttack = SHOTSANKED;
                     }   
                 }
             }
+
             return effectOnAttack;
             
         }
         
         public bool checkIfLoser()
         {
-            foreach (var ship in playerOcean.GetOceanShips())
+            foreach (var ship in playerOcean.Ships)
             {
-                if (ship.ShipSank == false)
+                if (!ship.ShipSank())
                 {
-                    return true;
+                    return false;
                 }
-                return false;
-
             }
+            return true;
         }
-
-
     }
 }

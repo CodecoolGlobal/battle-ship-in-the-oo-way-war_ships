@@ -26,7 +26,7 @@ namespace BattleShips
         {
             return OtherPlayer();
         }
-        public Player OtherPlayer()
+        protected Player OtherPlayer()
         {
             int index = playersList.IndexOf(currentPLayer);
             return playersList[index < playersList.Count ? index + 1 : index - 1];
@@ -34,18 +34,13 @@ namespace BattleShips
 
         public string[] PlayerShot(string playerName, int[] coords) 
         {
-            this.currentPLayer = playerName;
+            currentPLayer = playerName;
             return coords;
         }
 
-        public Player ChangePlayer()
+        protected void ChangePlayer()
         {
-            if( playersList.IndexOf(currentPLayer) == 0 )
-            {
-                this.currentPLayer = playersList[1];
-            }
-            
-            this.currentPLayer = playersList [0];
+            currentPLayer = OtherPlayer();
         }   
 
         public Player GameWinner(List playersList)

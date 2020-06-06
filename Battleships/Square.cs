@@ -2,23 +2,32 @@ namespace BattleShips
 {
     public class Square
     {
-        private static char SYMBOL = 'X';
+        private static string SYMBOL = " ";
         private string aSquare;
 
         public bool isHit {get; set;}
+        public Square()
+        {
+            this.aSquare = SYMBOL;
+            this.isHit = false;
+        }
 
-
-        public Square(string square, bool isHit)
+        public Square(string asquare)
+        {
+            this.aSquare = asquare;
+            this.isHit = false;
+        }
+        public Square(string asquare, bool ishit)
 
         {
-            this.aSquare = square;
-            this.isHit = false;
+            this.aSquare = asquare;
+            this.isHit = ishit;
         }
         public string GetSquare() {
             return aSquare;
         }
 
-        public string toString(bool isHit)
+        public string toString()
         {
             if (isHit == false)
             {
