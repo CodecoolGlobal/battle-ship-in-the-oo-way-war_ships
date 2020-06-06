@@ -46,15 +46,27 @@ namespace BattleShips
         protected void DisplayFrameTop(string title, int width)
         {
             Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", 20)) + "\u2513");
-            int titleLenEven = title.Length % 2 == 0 ? title.Length : title.Length + ;
+            int titleLenEven = title.Length % 2 == 0 ? title.Length : title.Length + 1;
             Console.WriteLine('\u2503'.ToString() + new string(' ', (width - titleLenEven) / 2) + 
                                 $"{title.ToUpper()}" + new string(' ', (width - titleLenEven) / 2) + "\u2513");
         }
         
-        protected void DisplayFrameBottom(int width)
+        protected void DisplayFrameBottom(int width, bool needEnter)
         {
-            Console.WriteLine('\u2503'.ToString() + $"{String.Empty:width}" + "\u2513");
-            Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u2513");
+            if (needEnter)
+            {   
+                string msg = "Press ENTER to close this window.."
+                int msgLenEven = msg.Length % 2 == 0 ? msg.Length : msg.Length + 1;
+                Console.WriteLine('\u2503'.ToString() + new string(' ', (width - msgLenEven) / 2) + 
+                                $"{msg}" + new string(' ', (width - msgLenEven) / 2) + "\u2513");
+                Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u2513");
+                Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine('\u2503'.ToString() + $"{String.Empty:width}" + "\u2513");
+                Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u2513");
+            }
         }
         public string Menu(string title, string info, Dictionary<string,string> options)
         {
@@ -75,7 +87,7 @@ namespace BattleShips
                     Console.WriteLine($"{ifPointer} {optionDisplayed}");
                 }
                 DisplayRemainingScreenEmpty(keyList.Count, 5);
-                DisplayFrameBottom(Console.WindowWidth);
+                DisplayFrameBottom(Console.WindowWidth, false);
                 var pressedKey = Console.ReadKey().Key;
                 if (pressedKey == ConsoleKey.UpArrow && selectedKeyNum > 0)
                 {
@@ -97,12 +109,26 @@ namespace BattleShips
         {
             DisplayFrameTop("game statistics", Console.WindowWidth);
 
+            var currGameTimeStr = (DateTime.Now - currentGame.startTime).ToString("c");
+            var currGameType = currentGame.gameTypeName; 
+            var currGamePlayersStat = currentGame.PlayersToTable(); // 3lines
+
+            Console.WriteLine(String.Format("  {0, -25} - {1, -25}", "Game time",currGameTimeStr));
+            Console.WriteLine(String.Format("  {0, -25} - {1, -25}", "Game time",currGameTimeStr));
+            foreach (var line in currGamePlayersStat)
+            {
+                Console.WriteLine("  " + line);
+            }
+            DisplayRemainingScreenEmpty(5, 2);
+            DisplayFrameBottom(Console.WindowWidth, true);
+
+
         }
         public string GetStringData(string query, string dataName)
         {
             DisplayFrameTop($"{query}", Console.WindowWidth);
             DisplayHalfScreenEmpty();
-            Console.WriteLine($"Please provide {dataName}");
+            Console.WriteLine($"  Please provide {dataName} and hit Enter");
             var result = Console.ReadLine();
             return result;
             
@@ -113,20 +139,27 @@ namespace BattleShips
             {
                 DisplayFrameTop($"{query}", Console.WindowWidth);
                 DisplayHalfScreenEmpty();
-                Console.WriteLine($"Please provide {dataName}");
+                Console.WriteLine($"  Please provide {dataName} [{rangeEnds[0]}, {rangeEnds[1]}] and hit Enter");
                 try
                 {
                     var result = int.Parse(Console.ReadLine());
-                    return result;
+                    if (result >= rangeEnds[0] && result <= rangeEnds[1])
+                    {
+                        return result;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
                 }
-                catch (FormatException e)
+                catch
                 {
-                    DisplayErrorMessage("Please enter an integer!");
+                    DisplayMessage(" Please enter an integer in correct range");
                 }
             }
         }
         
-        private void DisplayErrorMessage(string errorMessage)
+        private void DisplayMessage(string errorMessage)
         {
             Console.Clear();
             DisplayFrameTop("Invalid value", Console.WindowWidth);

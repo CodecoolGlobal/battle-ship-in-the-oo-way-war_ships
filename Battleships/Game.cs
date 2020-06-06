@@ -7,11 +7,12 @@ namespace BattleShips
 {
     class Game
     {
-        private DateTime startTime;
+        public DateTime startTime {get;}
         private DateTime endTime;
+        public TimeSpan gameTime {get; set;}
         //Game type pvp or pvc
-        private string gameTypeName;
-        private List<Player> playersList;
+        public string gameTypeName {get;}
+        public List<Player> playersList {get; set;}
         private Player currentPLayer;
 
 
@@ -22,6 +23,10 @@ namespace BattleShips
             this.playersList = playersListInput;
             this.gameTypeName = gameType;
 
+            while (true)
+            {
+
+            }
 
         }
         public Player ChangePlayerTurn()
@@ -61,10 +66,40 @@ namespace BattleShips
             {
                 if (player.checkIfLoser() == false)
                 {
+                    endTime = DateTime.Now;
+                    gameTime = endTime - startTime;
                     return true;
                 }
             }   
             return false;
+        }
+        public string[] PlayersToTable()
+        {
+            var playersTableData = new string[playersList.Count + 1];
+            playersTableData[0] = String.Format(" {0, -15}| {1, -15}| {2, -10}| {3, - 40}", "player name", "player type"
+                                                , "Remaining ships").ToUpper();
+            Player curPlayer;
+            List<Ship> curShips;
+            string shipsRemaining;                                   
+            for (int i = 0; i < playersList.Count; i++)
+            {   
+                curPlayer = playersList[i];
+                curShips = curPlayer.playerOcean.Ships;
+                shipsRemaining = String.Empty;
+                foreach (var _ship in curShips)
+                {
+                    if (_ship.ShipSank() == 0)
+                    {   
+                        var _size = _ship.Squares.Count;
+                        shipsRemaining += BattleshipsController.shipsSizesAndNames[_size] + $" [{_size}]" + ", ";
+                    }
+                }
+                shipsRemaining.Trim().TrimEnd(',');
+                playersTableData[i] = String
+                                        .Format(" {0, -15}| {1, -15}| {2, -10}| {3, -45}", curPlayer.Name, curPlayer.isComp ? "human" : "CPU"
+                                        , shipsRemaining);
+            }
+            return playersTableData;
         }
 
     }

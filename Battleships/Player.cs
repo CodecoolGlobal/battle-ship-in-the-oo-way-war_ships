@@ -10,23 +10,27 @@ namespace BattleShips
     {
 
         public Ocean playerOcean;
-        private string Name;
-        private bool isComp;
-        private bool isLoser;
+        public string Name {get;}
+        // Read-only name
+        public bool isComp {get;}
+        // Read-only type
+        public int shotsFired {get;}
+        //Read-only shotsFired
         public static int MISSAGAIN = 0;
         public static int MISSOK  = 1;
         public static int SHOTAGAIN = 2;
         public static int SHOTOK = 3;
         public static int SHOTSANKED = 4;
-        public Player(string name, List<Ship> ships)
+
+        public Player(bool isCPU, string name)
         {       
             this.Name = name;
-            this.playerOcean = new Ocean(ships); 
+            this.playerOcean = new Ocean();
+            this.isComp = isCPU;
         }
-        public Player(string name)
+        public Player(bool isCPU, string name, List<Ship> ships) : this(isCPU, name)
         {       
-            this.Name = name;
-            this.playerOcean = new Ocean(); 
+            this.playerOcean = new Ocean(ships); 
         }
         // MISSAGAIN = 0 - miss, already shot at; MISSOK = 1 - miss, new shot; SHOTAGAIN = 2 - shot, already shot; SHOTOK = 3 - shot, new shot
         private int EffectOnAttack(Square square)

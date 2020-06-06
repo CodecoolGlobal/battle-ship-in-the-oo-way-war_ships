@@ -7,6 +7,14 @@ namespace BattleShips
 {
     class BattleshipsController
     {
+        public static Dictionary<int, string> shipsSizesAndNames= new Dictionary<int, string>
+        {
+            {5, "carrier"},
+            {4, "battleship"},
+            {3, "cruiser"},
+            {3, "submarine"},
+            {2, "destroyer"}
+        };
         private static Dictionary<string,string> mainMenuOptions = new Dictionary<string, string>
         {
             {"new_game", "Start new game"},
@@ -22,27 +30,20 @@ namespace BattleShips
         private static string mainMenuInfo = "Select an action. Move using arrows, confirm your selection by pressing Enter";
         private Dictionary<string,string> settingsMenuOptions = new Dictionary<string, string>
         {
-            {"size", "Set size of the player board [5-20]"},
+            {"ocean_width", $"Set width of the player's ocean [8 - 20]. Current {Ocean.WIDTH}"},
+            {"ocean_height", $"Set width of the player's ocean [8 - 20]. Current {Ocean.HEIGHT}"},
             {"ships", "Set numbers of particular ship sizes"},
             {"back", "Go back to main menu"}
         };
-        private string settingsMenuInfo = "Select a setting to edit..."
+        private string settingsMenuInfo = "Select a setting to edit...";
         private string[] openingScreen;
-        private View gameDisplay = new View(Console.WindowWidth,Console.WindowHeight);
+        private View controllerDisplay = new View(Console.WindowWidth,Console.WindowHeight);
 
         public BattleshipsController()
         {
-            var shipsNamesAndSizes = new Dictionary<string, int>
-            {
-                {"carrier", 5},
-                {"battleship", 4},
-                {"cruiser", 3},
-                {"submarine", 3},
-                {"destroyer", 2}
-            }
             while (true)
             {
-                string menuChoice = gameDisplay.Menu("Main Menu", mainMenuInfo, mainMenuOptions);
+                string menuChoice = controllerDisplay.Menu("Main Menu", mainMenuInfo, mainMenuOptions);
                 switch (menuChoice)
                 {
                     case "new_game":
@@ -53,12 +54,12 @@ namespace BattleShips
 
                     case "options":
                     while (true)
-                        gameDisplay.DisplayGameStatistics
-                        string optionChoice = gameDisplay.Menu("Options", settingsMenuInfo, settingsMenuOptions);
+                        controllerDisplay.DisplayOptions;
+                        string optionChoice = controllerDisplay.Menu("Options", settingsMenuInfo, settingsMenuOptions);
                         switch (optionChoice)
                         {
-                            case "size":
-                                gameDisplay.
+                            case "ocean_width":
+                                controllerDisplay.
 
 
                         }
@@ -73,9 +74,10 @@ namespace BattleShips
         public Player InitPlayer()
         {
             
-            var playerName = gameDisplay.GetStringData("Create New Player", "Player name");
+            var playerName = controllerDisplay.GetStringData("Create New Player", "Player name");
             Player newPlayer = new Player(playerName);
-            gameDisplay.Display
+            controllerDisplay.Display
         }
     }
+ 
 }

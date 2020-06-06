@@ -7,8 +7,8 @@ namespace BattleShips
 {
     public class Ocean
     {
-        private static int HEIGHT = 10;
-        private static int WIDTH = 10;
+        public static int HEIGHT = 10;
+        public static int WIDTH = 10;
         private List<List<Square>> Squares;
         public List<Ship> Ships {get; set;}
 
@@ -54,7 +54,7 @@ namespace BattleShips
                 }
             }
         }
-        protected void InsertShipsList(List<Ship> shipsList)
+        private void InsertShipsList(List<Ship> shipsList)
         {
             Ship _ship;
             for (int j = 0; j < shipsList.Count; j++) 
@@ -78,7 +78,7 @@ namespace BattleShips
                 }
             }
         }
-        protected List<List<Square>> GenerateSquares() 
+        private List<List<Square>> GenerateSquares() 
         {
             for (int i = 0; i < HEIGHT; i++)
             {

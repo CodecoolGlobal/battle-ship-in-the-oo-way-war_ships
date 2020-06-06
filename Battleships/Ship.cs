@@ -6,7 +6,6 @@ namespace BattleShips
 {
     public class Ship 
     {
-
         public List<Square> Squares {get; set;}
         private bool isHorizontal;
         private Point StartingPoint = new Point();
@@ -36,16 +35,22 @@ namespace BattleShips
             return StartingPoint;
         }
         // Getting info if ship's sank
-        public bool ShipSank() 
+        public int ShipSank() 
         {
+            int sizeSank = 0;
             foreach (var square in Squares) 
             {
-                if (square.isHit) 
+
+                if (!square.isHit) 
                 {
-                    return false;
+                    return 0;
+                }
+                else
+                {
+                    sizeSank++;
                 }
             }
-            return true;
+            return sizeSank;
         }
         
     }
