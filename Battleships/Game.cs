@@ -27,6 +27,7 @@ namespace BattleShips
         {
             return OtherPlayer();
         }
+        
         protected Player OtherPlayer()
         {
             int index = playersList.IndexOf(currentPLayer);
@@ -44,17 +45,18 @@ namespace BattleShips
             currentPLayer = OtherPlayer();
         }   
 
-        public Player GameWinner(List playersList)
+        public Player GameWinner(List<Player> playersList)
         {
-            if(currentPLayer.checkIfLoser == true)
+            if(currentPLayer.checkIfLoser() == true)
             {
                 return OtherPlayer();
             }
 
-            else if( OtherPlayer.checkIfLoser == true)
+            else if( OtherPlayer().checkIfLoser() == true)
             {
                 return currentPLayer;
-            }            
+            }
+            return null;
         }
 
         public bool GameEnd(List playersList)
@@ -66,6 +68,7 @@ namespace BattleShips
                     return false;
                 }
             }
+
         }
 
     }
