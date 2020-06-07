@@ -143,11 +143,11 @@ namespace BattleShips
             return newShip;
         }
 
-        public List<Ship> RandomlyGenerateShips(int maximumSize)
+        public List<Ship> RandomlyGenerateShips(int minimumSize, int maximumSize)
         // Method to generate random ships inside Borad size with one of each 
         {
             List<Ship> generatedShips = new List<Ship>();
-            for (int size = maximumSize; size < 0; size--)
+            for (int size = maximumSize; size < minimumSize; size--)
             {
                 generatedShips.Add(RandomlyGenerateShip(size, generatedShips));
             }

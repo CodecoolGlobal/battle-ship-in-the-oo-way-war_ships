@@ -27,6 +27,12 @@ namespace BattleShips
         {       
             this.playerOcean = new Ocean(ships); 
         }
+        public Player(bool isCPU, string name, bool randomSips) : this(isCPU, name)
+        {       
+            this.playerOcean = new Ocean();
+            playerOcean.Ships = playerOcean.RandomlyGenerateShips(2, 5);
+            playerOcean.Ships.Add(playerOcean.RandomlyGenerateShip(3, playerOcean.Ships));
+        }
         // MISSAGAIN = 0 - miss, already shot at; MISSOK = 1 - miss, new shot; SHOTAGAIN = 2 - shot, already shot; SHOTOK = 3 - shot, new shot
         private int EffectOnAttack(Square square)
         {

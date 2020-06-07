@@ -23,14 +23,18 @@ namespace BattleShips
             this.playersList = playersListInput;
             this.gameTypeName = gameType;
             this.currentPLayer = playersList[0];
-                
+            
+            var gameDisplay = new View(BattleshipsController.WIDTH * 4 + 10,BattleshipsController.HEIGHT * 2 + 12);
+            
             bool isRunning = true;
             while (isRunning)
             {
+                var otherPlayer = OtherPlayer();
                 System.Console.WriteLine("Enter the coordinates of attack\n");
-                Point coords = Console.ReadLine();
-                var playerShot = PlayerShot(currentPLayer, coords); 
+                Point coords = gameDisplay.PlayerBoardsAndAttack(currentPLayer, otherPlayer);
+                var playerShot = PlayerShot(otherPlayer, coords); 
                 var message = shotMessage(playerShot);
+                gameDisplay.PlayerBoardsAttackResult(currentPLayer, otherPlayer, message);
                 bool isEnd = GameEnd(playersList);
                 if (isEnd == true)
                 {
@@ -40,8 +44,6 @@ namespace BattleShips
                 Player nextPlayer = ChangePlayerTurn();
                 currentPLayer = nextPlayer;
                 continue;
-
-
             }
 
         }

@@ -33,7 +33,7 @@ namespace BattleShips
             {"pvp", "Player vs player"},
             {"pvc", "Player vs computer"},
             {"cvc", "Computer vs computer. Simulation"}
-        }
+        };
         private static string mainMenuInfo = "Select an action. Move using arrows, confirm your selection by pressing Enter";
         private Dictionary<string,string> settingsMenuOptions = new Dictionary<string, string>
         {
@@ -44,7 +44,7 @@ namespace BattleShips
         };
         private string settingsMenuInfo = "Select a setting to edit...";
         private string[] openingScreen;
-        private View controllerDisplay = new View(WIDTH * 4 + 10,HEIGHT * 2 + 10);
+        private View controllerDisplay = new View(WIDTH * 4 + 10,HEIGHT * 2 + 12);
 
         public BattleshipsController()
         {
@@ -55,7 +55,8 @@ namespace BattleShips
                 {
                     case "new_game":
                         var players = new List<Player>();
-                        players.Add(InitPlayer());
+                        players.Add(InitRandomPlayer());
+                        players.Add(InitRandomPlayer());
                         Game battleshipGame = new Game("pvp", players);
                         break;
 
@@ -95,12 +96,12 @@ namespace BattleShips
                 }
             }
         }
-        public Player InitPlayer()
+        public Player InitRandomPlayer()
         {
-            
-            var playerName = controllerDisplay.GetStringData("Create New Player", "Player name");
-            Player newPlayer = new Player(playerName);
-            controllerDisplay.Display
+            var playerName = controllerDisplay.GetStringData("Create New Player with random ships", "Player name");
+            Player newPlayer = new Player(false, playerName, true);
+            controllerDisplay.DisplayMessage("new player", $"player {newPlayer.Name} created");
+            return newPlayer;
         }
     }
  

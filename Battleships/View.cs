@@ -57,6 +57,7 @@ namespace BattleShips
         }
         private void DisplayFrameTop(string title, int width)
         {
+            Console.Clear();
             Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", 20)) + "\u2513");
             int titleLenEven = title.Length % 2 == 0 ? title.Length : title.Length + 1;
             Console.WriteLine('\u2503'.ToString() + new string(' ', (width - titleLenEven) / 2) + 
@@ -89,10 +90,10 @@ namespace BattleShips
             }
         }
         
-        private void DisplayMessage(string errorMessage)
+        public void DisplayMessage(string info, string errorMessage)
         {
             Console.Clear();
-            DisplayFrameTop("Invalid value", Console.WindowWidth);
+            DisplayFrameTop(info, Console.WindowWidth);
             DisplayHalfScreenEmpty();
             Console.WriteLine(errorMessage + "\n\nPress any key...");
             Console.ReadKey();
@@ -192,15 +193,55 @@ namespace BattleShips
             }
 
         }
+
+
+
+
         // public methods
         public Point PlayerBoardsAndAttack(Player curPlayer, Player othPlayer)
         {
             var selectionPoint = new Point(BattleshipsController.WIDTH / 2, BattleshipsController.HEIGHT / 2);
+            ConsoleKey keyPressed = ConsoleKey.A;
+            do
+            {
+                DisplayFrameTop("choose field to attack", Console.WindowWidth);
+                DisplayPlayerBoardSelection(curPlayer,othPlayer, selectionPoint);
+                Console.WriteLine("\n\n\n               CHOOSE FIELD TO ATTACK AND CONFIRM WITH ENTER\n\n");
+                DisplayFrameBottom(Console.WindowWidth, false);
+                keyPressed = Console.ReadKey().Key;
+                if (keyPressed == ConsoleKey.UpArrow && selectionPoint.Y > 0)
+                {
+                    selectionPoint.Y--;
+                }
+                else if (keyPressed == ConsoleKey.DownArrow && selectionPoint.Y < BattleshipsController.HEIGHT - 1)
+                {
+                    selectionPoint.Y++;
+                }
+                else if (keyPressed == ConsoleKey.RightArrow && selectionPoint.X < BattleshipsController.WIDTH - 1)
+                {
+                    selectionPoint.X++;
+                }
+                else if (keyPressed == ConsoleKey.LeftArrow && selectionPoint.X > 0)
+                {
+                    selectionPoint.X--;
+                }
+
+            } while (!(keyPressed == ConsoleKey.Enter));
+            return selectionPoint;
 
         }
-        public void PlayerBoardsWithoutAttack(Player curPlayer, Player othPlayer)
-        {
-
+        public void PlayerBoardsAttackResult(Player curPlayer, Player othPlayer, string msgOnAttack)
+        {   
+            ConsoleKey keyPressed = ConsoleKey.A;
+            var selectionPoint = new Point(-1, -1);
+            do
+            {   
+                DisplayFrameTop("choose field to attack", Console.WindowWidth);
+                DisplayPlayerBoardSelection(curPlayer,othPlayer, selectionPoint);
+                Console.WriteLine($"\n\n\n               {msgOnAttack}\n\n");
+                DisplayFrameBottom(Console.WindowWidth, false);
+                keyPressed = Console.ReadKey().Key;
+            } while (keyPressed == ConsoleKey.Enter);
         }
         public void DisplayPlayerBoardSelection(Player curPlayer, Player othPlayer, Point selected)
         {
@@ -235,25 +276,25 @@ namespace BattleShips
                     plrPrint += plrBoard[prnty][prntx];
                     othPrint += othBoard[prnty][prntx];
                 }
-                Console.WriteLine("  " + othPrint + "  " plrPrint);
+                Console.WriteLine("  " + othPrint + "  " + plrPrint);
             }
             
 
 
         }
-        public List<Ship> PutShipsOnBoard(string info, )
-        {
-            var keyList = options.Keys.ToList();
-            int selectedKeyNum = 0;
-            string pointer = " >>>";
-            string ifPointer;
-            string optionDisplayed;
-            while (true)
-            {
-                DisplayFrameTop("Put ships on Your ocean", Console.WindowWidth);
-                Console.WriteLine();
-            }
-        }
+        // public List<Ship> PutShipsOnBoard(string info, )
+        // {
+        //     var keyList = options.Keys.ToList();
+        //     int selectedKeyNum = 0;
+        //     string pointer = " >>>";
+        //     string ifPointer;
+        //     string optionDisplayed;
+        //     while (true)
+        //     {
+        //         DisplayFrameTop("Put ships on Your ocean", Console.WindowWidth);
+        //         Console.WriteLine();
+        //     }
+        // }
         public string Menu(string title, string info, Dictionary<string,string> options)
         {
             var keyList = options.Keys.ToList();
@@ -338,7 +379,7 @@ namespace BattleShips
                 }
                 catch
                 {
-                    DisplayMessage(" Please enter an integer in correct range");
+                    DisplayMessage("Invalid value"," Please enter an integer in correct range");
                 }
             }
         }
