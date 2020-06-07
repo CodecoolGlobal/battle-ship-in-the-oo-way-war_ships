@@ -17,7 +17,8 @@ namespace BattleShips
             List<Square> squares = new List<Square>();
             for (int i = 0; i < size; i++) 
             {
-                squares[i] = new Square("S", false);
+                var asquare = new Square("S", false);
+                squares.Add(asquare);
             }
             this.Squares = squares;
             this.isHorizontal = ishorizontal;

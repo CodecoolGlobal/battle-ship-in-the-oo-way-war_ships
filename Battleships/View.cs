@@ -9,7 +9,7 @@ namespace BattleShips
     {
         private static Dictionary<string, string> SYMB = new Dictionary<string, string>()
         {
-            {"ver", "\u2500"},
+            {"vert", "\u2500"},
             {"hor", "\u2502"},
             {"ltc", "\u250C"},
             {"rtc", "\u2510"},
@@ -30,7 +30,6 @@ namespace BattleShips
         private int consoleWidth;
         public View(int Width, int Height) 
         {
-            SetConsoleDimensions(Width, Height);
 
             consoleColorScheme.Add("selected_back", ConsoleColor.Blue);
             consoleColorScheme.Add("selected_front", ConsoleColor.White);
@@ -58,10 +57,10 @@ namespace BattleShips
         private void DisplayFrameTop(string title, int width)
         {
             Console.Clear();
-            Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", 20)) + "\u2513");
+            Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", width)) + "\u2513");
             int titleLenEven = title.Length % 2 == 0 ? title.Length : title.Length + 1;
-            Console.WriteLine('\u2503'.ToString() + new string(' ', (width - titleLenEven) / 2) + 
-                                $"{title.ToUpper()}" + new string(' ', (width - titleLenEven) / 2) + "\u2513");
+            Console.WriteLine('\u2503'.ToString() + new string(' ', (width - titleLenEven) / 2 + 1) + 
+                                $"{title.ToUpper()}" + new string(' ', (width - titleLenEven) / 2 + 1) + "\u2503");
         }
         
         private void DisplayFrameBottom(int width, bool needEnter)
@@ -72,13 +71,13 @@ namespace BattleShips
                 int msgLenEven = msg.Length % 2 == 0 ? msg.Length : msg.Length + 1;
                 Console.WriteLine('\u2503'.ToString() + new string(' ', (width - msgLenEven) / 2) + 
                                 $"{msg}" + new string(' ', (width - msgLenEven) / 2) + "\u2513");
-                Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u2513");
+                Console.WriteLine("\u2516" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u251a");
                 Console.ReadLine();
             }
             else
             {
-                Console.WriteLine('\u2503'.ToString() + $"{String.Empty:width}" + "\u2513");
-                Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u2513");
+                Console.WriteLine('\u2503'.ToString() + $"{String.Empty:width}" + "\u2503");
+                Console.WriteLine("\u2516" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u251a");
             }
         }
         private void DisplayTable(Dictionary<string, string> optionsDictionary)
@@ -278,9 +277,6 @@ namespace BattleShips
                 }
                 Console.WriteLine("  " + othPrint + "  " + plrPrint);
             }
-            
-
-
         }
         // public List<Ship> PutShipsOnBoard(string info, )
         // {
@@ -297,25 +293,26 @@ namespace BattleShips
         // }
         public string Menu(string title, string info, Dictionary<string,string> options)
         {
-            var keyList = options.Keys.ToList();
+            Console.Clear();
+            var keyList = options.Keys.ToArray();
             int selectedKeyNum = 0;
             string pointer = " >>>";
             string ifPointer;
             string optionDisplayed;
-            ConsoleKey keyPressed = ConsoleKey.A;
+            ConsoleKey pressedKey = ConsoleKey.A;
             do
             {
                 DisplayFrameTop(title, Console.WindowWidth);
                 Console.WriteLine(info);
-                for (int ctr = 0; ctr < keyList.Count; ctr++)
+                for (int ctr = 0; ctr < keyList.Length; ctr++)
                 {   
                     ifPointer = selectedKeyNum == ctr ? pointer : "    ";
                     optionDisplayed = options[keyList[ctr]];
                     Console.WriteLine($"{ifPointer} {optionDisplayed}");
                 }
-                DisplayRemainingScreenEmpty(keyList.Count, 5);
+                DisplayRemainingScreenEmpty(keyList.Length, 5);
                 DisplayFrameBottom(Console.WindowWidth, false);
-                var pressedKey = Console.ReadKey().Key;
+                pressedKey = Console.ReadKey().Key;
                 if (pressedKey == ConsoleKey.UpArrow && selectedKeyNum > 0)
                 {
                     selectedKeyNum--;
@@ -324,14 +321,10 @@ namespace BattleShips
                 {
                     selectedKeyNum++;
                 }
-            } while (keyPressed != ConsoleKey.Enter);
+            } while (!pressedKey.Equals(ConsoleKey.Enter));
             return keyList[selectedKeyNum];
         }
-        public void SetConsoleDimensions(int width, int height)
-        {
-            Console.WindowHeight = width;
-            Console.WindowWidth = height;
-        }
+
         public void DisplayGameStatistics(Game currentGame)
         {
             DisplayFrameTop("game statistics", Console.WindowWidth);

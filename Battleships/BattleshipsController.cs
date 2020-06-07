@@ -11,7 +11,6 @@ namespace BattleShips
         {
             {5, "carrier"},
             {4, "battleship"},
-            {3, "cruiser"},
             {3, "submarine"},
             {2, "destroyer"}
         };
@@ -44,13 +43,14 @@ namespace BattleShips
         };
         private string settingsMenuInfo = "Select a setting to edit...";
         private string[] openingScreen;
-        private View controllerDisplay = new View(WIDTH * 4 + 10,HEIGHT * 2 + 12);
+        private View controllerDisplay = new View(WIDTH * 4 + 6,HEIGHT * 2 + 12);
 
         public BattleshipsController()
         {
             while (true)
             {
                 string menuChoice = controllerDisplay.Menu("Main Menu", mainMenuInfo, mainMenuOptions);
+                Console.WriteLine(menuChoice);
                 switch (menuChoice)
                 {
                     case "new_game":
@@ -104,5 +104,4 @@ namespace BattleShips
             return newPlayer;
         }
     }
- 
 }

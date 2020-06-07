@@ -78,18 +78,19 @@ namespace BattleShips
         }
         private List<List<Square>> GenerateSquares() 
         {
-            List<Square> squareList = new List<Square>();
+            var theSquares = new List<List<Square>>();
             for (int i = 0; i < BattleshipsController.HEIGHT; i++)
             {
-                squareList.Clear();
-                Squares.Add(squareList);
+                Console.WriteLine(i.ToString());
+                var squareList = new List<Square>();
+                theSquares.Add(squareList);
                 for (int j = 0; j < BattleshipsController.WIDTH; j++) 
                 {
                     Square newSquare = new Square(" ", false);
-                    Squares[i].Add(newSquare);
+                    theSquares[i].Add(newSquare);
                 }
             }
-            return Squares;
+            return theSquares;
         }
         public List<List<Square>> GetOceanSquares() 
         {
