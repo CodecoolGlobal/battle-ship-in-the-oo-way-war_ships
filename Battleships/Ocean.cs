@@ -7,7 +7,7 @@ namespace BattleShips
 {
     public class Ocean
     {   
-        private List<List<Square>> Squares;
+        public List<List<Square>> Squares {get; set;}
         public List<Ship> Ships {get; set;}
 
         private Random randBase = new Random();
@@ -78,9 +78,10 @@ namespace BattleShips
         }
         private List<List<Square>> GenerateSquares() 
         {
+            List<Square> squareList = new List<Square>();
             for (int i = 0; i < BattleshipsController.HEIGHT; i++)
             {
-                List<Square> squareList = new List<Square>();
+                squareList.Clear();
                 Squares.Add(squareList);
                 for (int j = 0; j < BattleshipsController.WIDTH; j++) 
                 {

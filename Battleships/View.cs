@@ -7,6 +7,20 @@ namespace BattleShips
 {
     class View
     {
+        private static Dictionary<string, string> SYMB = new Dictionary<string, string>()
+        {
+            {"ver", "\u2500"},
+            {"hor", "\u2502"},
+            {"ltc", "\u250C"},
+            {"rtc", "\u2510"},
+            {"lbc", "\u2514"},
+            {"rbc", "\u2518"},
+            {"t", "\u252C"},
+            {"revt", "\u2534"},
+            {"cross", "\u253C"},
+            {"shot", "\u2591"},
+            {"sank", "\u2588"}
+        }
         private Dictionary<string, ConsoleColor> consoleColorScheme = new Dictionary<string, ConsoleColor>();
         private Dictionary<string, Color> drawingColorScheme = new Dictionary<string, Color>();
         private string[] mainMenuOptions;
@@ -55,7 +69,7 @@ namespace BattleShips
         {
             if (needEnter)
             {   
-                string msg = "Press ENTER to close this window.."
+                string msg = "Press ENTER to close this window..";
                 int msgLenEven = msg.Length % 2 == 0 ? msg.Length : msg.Length + 1;
                 Console.WriteLine('\u2503'.ToString() + new string(' ', (width - msgLenEven) / 2) + 
                                 $"{msg}" + new string(' ', (width - msgLenEven) / 2) + "\u2513");
@@ -100,7 +114,68 @@ namespace BattleShips
                 Console.WriteLine(String.Empty);
             }
         }
+        private string DisplaySquare(Square square)
+        {
+            if (square.isHit)
+            {
+                if (square.GetSquare() == "S")
+                {
+                    return "H";
+                }
+                else
+                {
+                    return "X";
+                }
+            }
+            else
+            {   
+                if (square.GetSquare() == "S")
+                {   
+                    return "S";
+                }
+                else
+                {
+                    return " ";
+                }
+            }
+        }
+        private string DisplayBoardElement(int xCoord, int yCoord, Square aSquare)
+        {
+            if (xCoord == 0 & yCoord == 0)
+            {
+                return
+            }
+            else if (xCoord == 0 | xCoord == BattleshipsController.WIDTH * 2)
+            {
+                return '\u2503'.ToString();
+            }
+            else if (xCoord)
+
+        }
         // public methods
+        public string DisplayPlayerBoard(Player curPlayer, Player othPlayer)
+        {
+            var plrOcean = curPlayer.playerOcean;
+            var othOcean = othPlayer.playerOcean;
+            List<List<string>> plrBoard = new List<List<string>>();
+            List<List<string>> othBoard = new List<List<string>>();
+
+            for (int ctry = 0; ctry < BattleshipsController.HEIGHT * 2 + 1; ctry++)
+            {
+                List<string> plrLstBoard = new List<string>();
+                List<string> othLstBoard = new List<string>();
+                for (int ctrx = 0; ctrx < BattleshipsController.WIDTH * 2 + 1; ctrx++)
+                {   
+
+                        plrLstBoard.Add(DisplaySquare(plrOcean.Squares[ctry % 2][ctrx % 2]));
+                        othLstBoard.Add(DisplaySquare(plrOcean.Squares[ctry % 2][ctrx % 2]));
+
+                    
+                }
+            }
+
+
+        }
         public List<Ship> PutShipsOnBoard(string info, )
         {
             var keyList = options.Keys.ToList();

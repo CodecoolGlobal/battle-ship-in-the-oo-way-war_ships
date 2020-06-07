@@ -71,6 +71,7 @@ namespace BattleShips
                        if (coords.X == checkShip.GetStartingPoint().X + ctr && coords.Y == checkShip.GetStartingPoint().Y)
                        {
                            effectOnAttack = EffectOnAttack(checkShip.Squares[ctr]);
+                           return effectOnAttack;
                        }
                     }
                     else
@@ -78,15 +79,17 @@ namespace BattleShips
                         if (coords.X == checkShip.GetStartingPoint().X && coords.Y == checkShip.GetStartingPoint().Y + ctr)
                        {
                            effectOnAttack = EffectOnAttack(checkShip.Squares[ctr]);
+                           return effectOnAttack;
                        }
                     }
                     if (checkShip.ShipSank() > 0)
                     {
                         effectOnAttack = BattleshipsController.SHOTSANKED;
+                        return effectOnAttack;
                     }   
                 }
             }
-
+            effectOnAttack = EffectOnAttack(playerOcean.Squares[coords.Y][coords.X]);
             return effectOnAttack;
             
         }
