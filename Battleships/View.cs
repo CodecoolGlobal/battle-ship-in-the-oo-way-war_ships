@@ -18,9 +18,11 @@ namespace BattleShips
             {"t", "\u252C"},
             {"revt", "\u2534"},
             {"cross", "\u253C"},
-            {"shot", "\u2591"},
-            {"sank", "\u2588"}
-        }
+            {"shot", "\u2668"},
+            {"selected", "\u2588"},
+            {"ship", "\u2693"},
+            {"norm", " "}
+        };
         private Dictionary<string, ConsoleColor> consoleColorScheme = new Dictionary<string, ConsoleColor>();
         private Dictionary<string, Color> drawingColorScheme = new Dictionary<string, Color>();
         private string[] mainMenuOptions;
@@ -37,11 +39,7 @@ namespace BattleShips
             drawingColorScheme.Add("selected_front", Color.WhiteSmoke);
             drawingColorScheme.Add("ship_hit", Color.Yellow);
             drawingColorScheme.Add("ship_sank", Color.Red);
-            drawingColorScheme.Add("miss", Color.Brown);
-
-
-
-            
+            drawingColorScheme.Add("miss", Color.Brown);      
 
         }
 
@@ -114,51 +112,103 @@ namespace BattleShips
                 Console.WriteLine(String.Empty);
             }
         }
-        private string DisplaySquare(Square square)
+        private string GetSquareDisplay(Square square)
         {
             if (square.isHit)
             {
                 if (square.GetSquare() == "S")
                 {
-                    return "H";
+                    return SYMB["shot"];
                 }
                 else
                 {
-                    return "X";
+                    return SYMB["miss"];
                 }
             }
             else
             {   
                 if (square.GetSquare() == "S")
                 {   
-                    return "S";
+                    return SYMB["ship"];
                 }
                 else
                 {
-                    return " ";
+                    return SYMB["norm"];
                 }
             }
         }
-        private string DisplayBoardElement(int xCoord, int yCoord, Square aSquare)
+        private string GetBoardElementDisplay(int xCoord, int yCoord, Ocean oceanToCheck, Point selectedPoint)
         {
-            if (xCoord == 0 & yCoord == 0)
+            if (xCoord == 0 && yCoord == 0)
             {
-                return
+                return SYMB["ltc"];
             }
-            else if (xCoord == 0 | xCoord == BattleshipsController.WIDTH * 2)
+            else if (xCoord == 0 && yCoord == BattleshipsController.HEIGHT * 2)
             {
-                return '\u2503'.ToString();
+                return SYMB["lbc"];
             }
-            else if (xCoord)
+            else if (yCoord == 0 && xCoord % 2 == 1)
+            {
+                return SYMB["t"];
+            }
+            else if (yCoord == 0 && xCoord == BattleshipsController.WIDTH * 2)
+            {
+                return SYMB["rtc"];
+            }
+            else if (yCoord == BattleshipsController.HEIGHT && xCoord % 2 == 1)
+            {
+                return SYMB["revt"];
+            }
+            else if (yCoord == BattleshipsController.HEIGHT && xCoord == BattleshipsController.WIDTH * 2)
+            {
+                return SYMB["rbc"];
+            }
+            else if (yCoord % 2 == 0 && xCoord % 2 == 1)
+            {
+                return SYMB["hor"];
+            }
+            else if (xCoord % 2 == 0 && yCoord % 2 == 1)
+            {
+                return SYMB["vert"];
+            }
+            else if (yCoord % 2 == 0 && xCoord % 2 == 0)
+            {
+                return SYMB["cross"];
+            }
+            else if (yCoord % 2 == 1 && xCoord % 2 == 1)
+            {
+                if (selectedPoint.X == xCoord / 2 && selectedPoint.Y == yCoord)
+                {
+                    return SYMB["selected"];
+                }
+                else
+                {
+                    return GetSquareDisplay(oceanToCheck.Squares[yCoord / 2][xCoord / 2]);
+                }
+            }
+            else
+            {
+                return String.Empty;
+            }
 
         }
         // public methods
-        public string DisplayPlayerBoard(Player curPlayer, Player othPlayer)
+        public Point PlayerBoardsAndAttack(Player curPlayer, Player othPlayer)
+        {
+            var selectionPoint = new Point(BattleshipsController.WIDTH / 2, BattleshipsController.HEIGHT / 2);
+
+        }
+        public void PlayerBoardsWithoutAttack(Player curPlayer, Player othPlayer)
+        {
+
+        }
+        public void DisplayPlayerBoardSelection(Player curPlayer, Player othPlayer, Point selected)
         {
             var plrOcean = curPlayer.playerOcean;
             var othOcean = othPlayer.playerOcean;
             List<List<string>> plrBoard = new List<List<string>>();
             List<List<string>> othBoard = new List<List<string>>();
+            Point negPoint = new Point(-1, -1);
 
             for (int ctry = 0; ctry < BattleshipsController.HEIGHT * 2 + 1; ctry++)
             {
@@ -166,13 +216,28 @@ namespace BattleShips
                 List<string> othLstBoard = new List<string>();
                 for (int ctrx = 0; ctrx < BattleshipsController.WIDTH * 2 + 1; ctrx++)
                 {   
-
-                        plrLstBoard.Add(DisplaySquare(plrOcean.Squares[ctry % 2][ctrx % 2]));
-                        othLstBoard.Add(DisplaySquare(plrOcean.Squares[ctry % 2][ctrx % 2]));
-
-                    
+                    plrLstBoard.Add(GetBoardElementDisplay(ctrx, ctry, plrOcean, negPoint));
+                    othLstBoard.Add(GetBoardElementDisplay(ctrx, ctry, othOcean, selected));
                 }
+                plrBoard.Add(plrLstBoard);
+                othBoard.Add(othLstBoard);
             }
+
+
+            //Printing lines
+            Console.WriteLine($"  {curPlayer.Name, 15} {othPlayer.Name, 30}");
+            var othPrint = String.Empty;
+            var plrPrint = String.Empty;
+            for (int prnty = 0; prnty < plrBoard.Count; prnty++)
+            {
+                for (int prntx = 0; prntx < plrBoard.Count; prntx++)
+                {   
+                    plrPrint += plrBoard[prnty][prntx];
+                    othPrint += othBoard[prnty][prntx];
+                }
+                Console.WriteLine("  " + othPrint + "  " plrPrint);
+            }
+            
 
 
         }

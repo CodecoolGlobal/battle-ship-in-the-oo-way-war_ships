@@ -44,7 +44,7 @@ namespace BattleShips
         };
         private string settingsMenuInfo = "Select a setting to edit...";
         private string[] openingScreen;
-        private View controllerDisplay = new View(Console.WindowWidth,Console.WindowHeight);
+        private View controllerDisplay = new View(WIDTH * 4 + 10,HEIGHT * 2 + 10);
 
         public BattleshipsController()
         {
