@@ -38,8 +38,9 @@ namespace BattleShips
             drawingColorScheme.Add("selected_front", Color.WhiteSmoke);
             drawingColorScheme.Add("ship_hit", Color.Yellow);
             drawingColorScheme.Add("ship_sank", Color.Red);
-            drawingColorScheme.Add("miss", Color.Brown);      
+            drawingColorScheme.Add("miss", Color.Brown);
 
+            consoleWidth = BattleshipsController.WIDTH * 2 + 10;
         }
 
         private void BackgroundColorChanger()
@@ -56,11 +57,10 @@ namespace BattleShips
         }
         private void DisplayFrameTop(string title, int width)
         {
-            Console.Clear();
-            Console.WriteLine("\u250f" + String.Concat(Enumerable.Repeat("\u2501", width)) + "\u2513");
+            Console.WriteLine(String.Concat(Enumerable.Repeat("\u2501", width)));
             int titleLenEven = title.Length % 2 == 0 ? title.Length : title.Length + 1;
-            Console.WriteLine('\u2503'.ToString() + new string(' ', (width - titleLenEven) / 2 + 1) + 
-                                $"{title.ToUpper()}" + new string(' ', (width - titleLenEven) / 2 + 1) + "\u2503");
+            Console.WriteLine(new string(' ', (width - titleLenEven) / 2 + 1) + 
+                                $"{title.ToUpper()}" + new string(' ', (width - titleLenEven) / 2 + 1));
         }
         
         private void DisplayFrameBottom(int width, bool needEnter)
@@ -69,15 +69,15 @@ namespace BattleShips
             {   
                 string msg = "Press ENTER to close this window..";
                 int msgLenEven = msg.Length % 2 == 0 ? msg.Length : msg.Length + 1;
-                Console.WriteLine('\u2503'.ToString() + new string(' ', (width - msgLenEven) / 2) + 
-                                $"{msg}" + new string(' ', (width - msgLenEven) / 2) + "\u2513");
-                Console.WriteLine("\u2516" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u251a");
+                Console.WriteLine(new string(' ', (width - msgLenEven) / 2) + 
+                                $"{msg}" + new string(' ', (width - msgLenEven) / 2));
+                Console.WriteLine(String.Concat(Enumerable.Repeat("\u2501", width)));
                 Console.ReadLine();
             }
             else
             {
-                Console.WriteLine('\u2503'.ToString() + $"{String.Empty:width}" + "\u2503");
-                Console.WriteLine("\u2516" + String.Concat(Enumerable.Repeat("\u2501", width - 2)) + "\u251a");
+                Console.WriteLine(String.Format(String.Empty, width));
+                Console.WriteLine(String.Concat(Enumerable.Repeat("\u2501", width)));
             }
         }
         private void DisplayTable(Dictionary<string, string> optionsDictionary)
@@ -293,7 +293,6 @@ namespace BattleShips
         // }
         public string Menu(string title, string info, Dictionary<string,string> options)
         {
-            Console.Clear();
             var keyList = options.Keys.ToArray();
             int selectedKeyNum = 0;
             string pointer = " >>>";
@@ -302,6 +301,7 @@ namespace BattleShips
             ConsoleKey pressedKey = ConsoleKey.A;
             do
             {
+                Console.Clear();
                 DisplayFrameTop(title, Console.WindowWidth);
                 Console.WriteLine(info);
                 for (int ctr = 0; ctr < keyList.Length; ctr++)
